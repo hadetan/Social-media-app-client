@@ -46,6 +46,7 @@ axiosClient.interceptors.response.use(async (response) => {
         const response = await axios.create({withCredentials: true}).get(`${configs.PORT}/auth/refresh`)
 
         if (response.status === 'ok') {
+//if this does'nt work then use this one //response.data.result.accessToken
             setItem(KEY_ACCESS_TOKEN, response.result.accessToken);
             originalRequest.headers[
                 'Authorization'

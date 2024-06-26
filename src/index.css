@@ -1,6 +1,11 @@
 @font-face {
     font-family: gilroy;
-    src: url(./fonts/Gilroy.ttf);
+    src: url(./assets/fonts/Gilroy.ttf);
+}
+
+@font-face {
+    font-family: dancing;
+    src: url(./assets/fonts/DancingScript-VariableFont_wght.ttf);
 }
 
 * {
@@ -10,10 +15,93 @@
 }
 
 body {
-    font-family: gilroy, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f7f7f7;
+    background-color: var(--off-white);
+    color: white;
+}
+
+:root {
+    --theme-color: #00caca;
+    --theme-color-light: #00dfdfc7;
+    --border-color: #dadada81;
+    --white: #ffffff;
+    --off-white: #000000;
+    --logout: #d60000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--white);
+    /* color: #212121; */
+    user-select: none;
+}
+
+h3, h6 {
+    font-weight: 400;
+}
+
+p {
+    color: #cfcfcf;
+    font-size: 0.9rem;
+}
+
+.hover-links {
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.hover-links:active {
+    color: var(--theme-color-light);
+}
+
+.follow-links {
+    cursor: pointer;
+    color: var(--theme-color-light);
+    padding: 5px;
+    border-radius: 6px;
+    transition: all 0.1s ease-in-out;
+}
+
+.follow-links:hover {
+    color: var(--white);
+    background-color: var(--theme-color-light);
+}
+
+.follow-links:active {
+    background-color: var(--theme-color);
+}
+
+.container {
+    max-width: 960px;
+    margin-inline: auto;
+}
+
+.btn-primary {
+    background-color: var(--theme-color);
+    color: var(--white);
+    font-weight: bold;
+    padding: 10px 40px;
+    cursor: pointer;
+}
+
+.btn-primary:active {
+    background-color: var(--theme-color-light);
+}
+
+.btn-secondary {
+    border: 2px solid var(--theme-color);
+    background-color: var(--off-white);
+    color: var(--theme-color);
+    font-weight: bold;
+    padding: 10px 40px;
+    cursor: pointer;
+}
+
+.btn-secondary:active {
+    background-color: transparent;
+    color: var(--theme-color-light);
+    border: 2px solid var(--theme-color-light);
 }

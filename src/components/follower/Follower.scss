@@ -1,0 +1,13 @@
+.follower {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // margin: 10px 0;
+    height: 60px;
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}

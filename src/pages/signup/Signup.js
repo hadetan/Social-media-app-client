@@ -57,9 +57,9 @@ const Signup = () => {
 
                     <input type="submit" className="submit" />
                 </form>
-                <p className="create-account">
-                    <Link to="/login" className="Link">
-                        Already have an account
+                <p className="login-account">
+                    <Link to="/login" className="Link hover-links">
+                        Already have an account?
                     </Link>
                 </p>
             </div>

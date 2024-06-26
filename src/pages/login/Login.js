@@ -52,7 +52,7 @@ const Login = () => {
                     <input type="submit" className="submit" />
                 </form>
                 <p className="create-account">
-                    <Link to="/signup" className="Link">
+                    <Link to="/signup" className="Link hover-links">
                         Create account
                     </Link>
                 </p>
