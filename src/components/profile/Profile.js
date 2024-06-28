@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.scss';
 import Post from '../post/Post';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import CreatePost from '../createPost/CreatePost';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserProfile } from '../../redux/slices/postsSlice';
 
 const Profile = () => {
-
     const navigate = useNavigate();
+    const params = useParams();
+    const userProfile = useSelector((state) => state.postsReducer.userProfile);
+    const myProfile = useSelector((state) => state.appConfigReducer.myProfile);
+    const dispatch = useDispatch();
+    const [isMyProfile, setIsMyProfile] = useState(false);
+
+    useEffect(() => {
+        dispatch(
+            getUserProfile({
+                userId: params.userId,
+            })
+        );
+
+        setIsMyProfile(myProfile?._id === params.userId);
+    }, [myProfile]);
 
     return (
         <div className="profile">
             <div className="container">
                 <div className="left-part">
+                    <CreatePost />
                     <Post />
                     <div className="border"></div>
                     <Post />
@@ -21,14 +39,29 @@ const Profile = () => {
                 </div>
                 <div className="right-part">
                     <div className="profile-card">
-                        <img className='user-img' src="https://images.pexels.com/photos/15286/pexels-photo.jpg" alt="" />
-                        <h3 className='user-name'>Aquib Ali</h3>
+                        <img
+                            className="user-img"
+                            src={userProfile?.avatar?.url}
+                            alt={userProfile?.name}
+                        />
+                        <h3 className="user-name">{userProfile?.name}</h3>
                         <div className="follower-info">
-                            <h4>40 followers</h4>
-                            <h4>29 following</h4>
+                            <h4>{`${userProfile?.followers?.length} Followers`}</h4>
+                            <h4>{`${userProfile?.followings?.length} followings`}</h4>
                         </div>
-                        <button className='follow btn-primary'>Follow</button>
-                        <button className='update-profile btn-secondary' onClick={() => navigate('/updateProfile')}>Update profile</button>
+                        {!isMyProfile && (
+                            <button className="follow btn-primary">
+                                Follow
+                            </button>
+                        )}
+                        {isMyProfile && (
+                            <button
+                                className="update-profile btn-secondary"
+                                onClick={() => navigate('/updateProfile')}
+                            >
+                                Update profile
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

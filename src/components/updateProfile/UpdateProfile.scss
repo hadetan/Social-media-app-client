@@ -14,12 +14,33 @@
             align-items: center;
             justify-content: center;
 
-            .user-img {
-                height: 160px;
-                width: 160px;
-                border-radius: 50%;
-                border: 2px solid var(--border-color);
-                user-select: none;
+            .input-user-img {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+
+                .labelImg {
+                    height: 160px;
+                    width: 160px;
+                    border-radius: 50%;
+                    border: 2px dashed var(--theme-color-light);
+                    user-select: none;
+                    cursor: pointer;
+                    // overflow: hidden;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                }
+
+                .inputImg {
+                    display: none;
+                }
             }
         }
 
@@ -49,7 +70,7 @@
                 cursor: pointer;
                 transition: all 0.2s ease-in-out;
             }
-        
+
             .submit:hover {
                 background-color: var(--white);
                 color: var(--theme-color);
@@ -69,7 +90,7 @@
                     // margin-top: 10px;
                     // margin-left: 10px;
                 }
-    
+
                 .btn-primary:active {
                     background-color: #bd0000;
                 }

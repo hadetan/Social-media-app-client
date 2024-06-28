@@ -31,28 +31,34 @@ axiosClient.interceptors.response.use(async (response) => {
     const error = data.error;
 
     // When refresh token expires, send user to login page
-    if (
-        statusCode === 401 &&
-        originalRequest.url === `${configs.PORT}/auth/refresh`
-    ) {
-        removeItem(KEY_ACCESS_TOKEN);
-        window.location.replace('/login', '_self');
-        return Promise.reject(error);
-    }
+    // if (
+    //     statusCode === 401 &&
+    //     originalRequest.url === `${configs.PORT}/auth/refresh`
+    // ) {
+    //     removeItem(KEY_ACCESS_TOKEN);
+    //     window.location.replace('/login', '_self');
+    //     return Promise.reject(error);
+    // }
 
     // The access token may have expired
     if (statusCode === 401 && !originalRequest._retry) {
-        originalRequest._retry = true
-        const response = await axios.create({withCredentials: true}).get(`${configs.PORT}/auth/refresh`)
+        originalRequest._retry = true;
+        const response = await axios
+            .create({ withCredentials: true })
+            .get(`${configs.PORT}/auth/refresh`);
 
         if (response.status === 'ok') {
-//if this does'nt work then use this one //response.data.result.accessToken
+            //if this does'nt work then use this one //response.data.result.accessToken
             setItem(KEY_ACCESS_TOKEN, response.result.accessToken);
             originalRequest.headers[
                 'Authorization'
             ] = `Bearer ${response.result.accessToken}`;
 
             return axios(originalRequest);
+        } else {
+            removeItem(KEY_ACCESS_TOKEN);
+            window.location.replace('/login', '_self');
+            return Promise.reject(error);
         }
     }
 
