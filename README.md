@@ -1,4 +1,4 @@
-# Project Title
+# Social Media App Client
 
 ## Description
 A social media web app that is build using NodeJS and ReactJS [Backend Link](https://github.com/hadetan/Social-media-app-server). We can create an account or login into an existing account and we can logout once its logged in or signed in, we can post images with captions, get a list of users whom we are following and get recommendations of user's profile who already exists in this social media's database, we can follow other user's, we can like others and as well as our posts (if we have any), we can update our name, bio and profile picture and lastly we can delete our account if we wish to.
