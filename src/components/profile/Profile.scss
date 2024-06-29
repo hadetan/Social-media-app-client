@@ -9,7 +9,7 @@
             margin: 20px 0;
         }
     }
-    
+
     .right-part {
         flex: 1;
         margin-top: 10px;
@@ -24,10 +24,12 @@
             .user-img {
                 height: 80px;
                 width: 80px;
+                object-fit: cover;
                 border-radius: 50%;
             }
 
-            .user-name, .follower-info{
+            .user-name,
+            .follower-info {
                 margin-top: 12px;
             }
 
@@ -38,7 +40,8 @@
                 gap: 40px;
             }
 
-            .follow, .update-profile {
+            .follow,
+            .update-profile {
                 margin-top: 20px;
                 border-radius: 6px;
                 transition: all 0.1s ease-in-out;
@@ -49,12 +52,11 @@
             }
         }
     }
-    
+
     .container {
         display: flex;
         gap: 20px;
         overflow: hidden;
         margin-top: 60px;
-
     }
 }

@@ -8,8 +8,8 @@ const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getMyInfo())
-    }, []);
+        dispatch(getMyInfo());
+    }, [dispatch]);
     return (
         <>
             <Navbar />

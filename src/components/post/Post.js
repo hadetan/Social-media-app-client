@@ -1,28 +1,65 @@
 import React from 'react';
 import './Post.scss';
 import Avatar from '../avatar/Avatar';
-import { CiHeart } from 'react-icons/ci';
+import { useDispatch } from 'react-redux';
+import { likeAndUnlike } from '../../redux/slices/postsSlice';
+import { IoIosHeartEmpty, IoMdHeart } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
+import { showToast } from '../../redux/slices/appConfigSlice';
+import { TOAST_SUCCESS } from '../../App';
 
 const Post = ({ post }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handlePostLike = async () => {
+        dispatch(
+            likeAndUnlike({
+                postId: post?._id,
+            })
+        );
+    };
     return (
         <div className="post">
             <div className="header">
-                <Avatar />
-                <h4 className='hover-links'>Aquib Ali</h4>
+                <Avatar src={post?.owner?.avatar?.url} />
+                <h4
+                    className="hover-links"
+                    onClick={() => navigate(`/profile/${post?.owner?._id}`)}
+                >
+                    {post?.owner?.name}
+                </h4>
             </div>
             <div className="content">
-                <img
-                    src="https://images.pexels.com/photos/15286/pexels-photo.jpg"
-                    alt="user post"
-                />
+                <img src={post?.image?.url} alt={post?.image?.publicId} />
             </div>
             <div className="footer">
                 <div className="like">
-                    <CiHeart className='hover-links icon'/>
-                    <h4>4 likes</h4>
+                    {post?.isLiked ? (
+                        <IoMdHeart
+                            className="hover-links heart"
+                            onClick={handlePostLike}
+                        />
+                    ) : (
+                        <IoIosHeartEmpty
+                            className="hover-links icon"
+                            onClick={handlePostLike}
+                        />
+                    )}
+                    <h4>{`${post?.likesCount} likes`}</h4>
                 </div>
-                <p className='caption'>This is my first trip to amazon Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, quaerat? Voluptatum, tempora consectetur. Fugiat eaque ea deserunt reprehenderit praesentium nemo eligendi enim error saepe inventore ipsam corporis repellat reiciendis debitis, sed suscipit quas dolorem provident sapiente atque molestias sint earum. Pariatur libero numquam, repellendus consectetur exercitationem dolore laborum deserunt non, unde cumque totam suscipit maiores quis eius ipsa! Ipsam quasi quis quibusdam harum id quidem vel ipsa, magnam est dolores beatae tempora fugiat, reiciendis, in mollitia vitae. Ab rem velit, aut assumenda repudiandae sapiente necessitatibus architecto accusamus provident quis vitae ad quidem a nobis maiores repellendus, harum neque recusandae illo?</p>
-                <h6 className='time-ago'>4 hrs ago</h6>
+                <p className="caption">
+                    {' '}
+                    <span
+                        className="caption-name hover-links"
+                        onClick={() => navigate(`/profile/${post?.owner?._id}`)}
+                    >
+                        {post?.owner?.name}
+                    </span>{' '}
+                    {post?.caption}
+                </p>
+
+                <h6 className="time-ago">{post?.timeAgo}</h6>
             </div>
         </div>
     );

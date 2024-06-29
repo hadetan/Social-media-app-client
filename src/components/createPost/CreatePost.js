@@ -4,7 +4,7 @@ import Avatar from '../avatar/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsCardImage } from 'react-icons/bs';
 import { axiosClient } from '../../utils/axiosClient';
-import { setLoading } from '../../redux/slices/appConfigSlice';
+import { getUserProfile } from '../../redux/slices/postsSlice';
 
 const CreatePost = () => {
     const [postImg, setPostImg] = useState('');
@@ -19,22 +19,24 @@ const CreatePost = () => {
         fileReader.onload = () => {
             if (fileReader.readyState === fileReader.DONE) {
                 setPostImg(fileReader.result);
-                console.log(fileReader.result);
             }
         };
     };
 
     const handlePostSubmit = async () => {
         try {
-            dispatch(setLoading(true));
             const result = await axiosClient.post('/posts/', {
                 caption,
                 postImg,
             });
-            console.log('post created', result);
+
+            dispatch(
+                getUserProfile({
+                    userId: myProfile?._id,
+                })
+            );
         } catch (error) {
         } finally {
-            dispatch(setLoading(false));
             setCaption('');
             setPostImg('');
         }
@@ -42,7 +44,7 @@ const CreatePost = () => {
     return (
         <div className="createPost">
             <div className="left-part">
-                <Avatar src={myProfile?.avatar.url}/>
+                <Avatar src={myProfile?.avatar?.url} />
             </div>
             <div className="right-part">
                 {postImg && (

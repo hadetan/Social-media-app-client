@@ -7,7 +7,7 @@
     background-color: #000000;
     z-index: 999;
     // margin-top: 60px;
-    
+
     .container {
         height: 100%;
         display: flex;
@@ -16,6 +16,10 @@
 
         .banner {
             font-family: dancing;
+
+            .mintgram {
+                font-size: 2.7rem;
+            }
         }
 
         h2 {

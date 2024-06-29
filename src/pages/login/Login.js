@@ -5,8 +5,8 @@ import { axiosClient } from '../../utils/axiosClient';
 import { KEY_ACCESS_TOKEN, setItem } from '../../utils/localStrorageManager';
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
@@ -14,14 +14,11 @@ const Login = () => {
         try {
             const response = await axiosClient.post('/auth/login', {
                 email,
-                password
+                password,
             });
             setItem(KEY_ACCESS_TOKEN, response.result.accessToken);
             navigate('/');
-
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (error) {}
     }
 
     return (
@@ -46,7 +43,7 @@ const Login = () => {
                         id="password"
                         placeholder="Enter password"
                         onChange={(e) => setPassword(e.target.value)}
-                        autoComplete='true'
+                        autoComplete="true"
                     />
 
                     <input type="submit" className="submit" />
